@@ -7,8 +7,7 @@
 #define Green 3
 MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance.
  
-void setup() 
-{
+void setup() {
   Serial.begin(9600);   // Initiate a serial communication
   SPI.begin();      // Initiate  SPI bus
   mfrc522.PCD_Init();   // Initiate MFRC522
@@ -21,8 +20,7 @@ void setup()
 
 }
 
-void loop() 
-{
+void loop() {
   // Look for new cards
   if ( ! mfrc522.PICC_IsNewCardPresent()) {
     return;
@@ -46,7 +44,8 @@ void loop()
   Serial.println();
   Serial.print("Message : ");
   content.toUpperCase();
-  if ((content.substring(1) == "1A 7C 78 30") || (content.substring(1) == "CC CC A3 16") ) {
+ 
+  if ( (content.substring(1) == "1A 7C 78 30") || (content.substring(1) == "CC CC A3 16" ) ) {
    //change here the UID of the card/cards that you want to give access
   
     Serial.println("Authorized access");
@@ -57,7 +56,7 @@ void loop()
     digitalWrite(Green, LOW);
   }
  
- else   {
+   else {
   
     Serial.println(" Access denied");
      digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
